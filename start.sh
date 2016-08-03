@@ -1,5 +1,6 @@
 #!/bin/bash
 
+OFFSET_STORAGE=${OFFSET_STORAGE:-zookeeper}
 ZK_HOSTS=${ZK_HOSTS:-localhost:2181}
 PORT=${PORT:-8080}
 REFRESH_SECONDS=${REFRESH_SECONDS:-10}
@@ -15,6 +16,7 @@ PLUGIN_ARGS=${PLUGIN_ARGS:-graphiteHost=${GRAPHITE_HOST},graphitePort=${GRAPHITE
 
 exec java -cp "/cp/*" \
   com.quantifind.kafka.offsetapp.OffsetGetterWeb \
+  --offsetStorage ${OFFSET_STORAGE} \
   --zk ${ZK_HOSTS} \
   --port ${PORT} \
   --refresh ${REFRESH_SECONDS}.seconds \
